@@ -8,7 +8,10 @@ const express_1 = __importDefault(require("express"));
 const app = express_1.default();
 const PORT = 3000;
 app.use(body_parser_1.json());
+app.get("/api/users/currentuser", (req, res) => {
+    res.send("I' am current user");
+});
 app.listen(PORT, (req, res) => {
-    console.log(`Auth service is running and listening in port ${PORT}`);
+    console.log(`Auth service listening in port ${PORT}`);
 });
 //# sourceMappingURL=index.js.map

@@ -1,13 +1,19 @@
 FROM node:alpine
 
-
+# working directory
 WORKDIR /usr/app
 
 
-COPY package.json .
+#copy package json to install new dependencies
+COPY ./package.json ./
 
 RUN npm install
 
-COPY . .
+COPY ./ ./
 
-CMD ["npm", "start"]
+
+#expose port to the host
+EXPOSE  3000
+
+
+CMD ["npm", "run", "dev"]
