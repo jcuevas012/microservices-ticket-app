@@ -1,8 +1,8 @@
-import express, { Application } from "express"
 import "express-async-errors"
 
 import { json } from "body-parser"
-
+import express, { Application } from "express"
+import mongoose from "mongoose"
 
 import NotFound from "./errors/not-found-error"
 import { errorHandler } from "./middlewares/error-handler"
@@ -18,11 +18,28 @@ app.use("/api/users", currentUserRouter)
 app.use("/api/users", signInRouter)
 app.use("/api/users", signUpRouter)
 
-app.get("*", () => {
+app.all("*", () => {
   throw new NotFound()
 })
 
 app.use(errorHandler)
-app.listen(PORT, (req, res) => {
-  console.log(`Auth service listening in port ${PORT}`)
-})
+
+const start = async () => {
+  try {
+    await mongoose.connect("mongodb://auth-mongo-srv:27017/auth", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    })
+
+    console.log("Connected to mongodb")
+  } catch (err) {
+    console.error(err)
+  }
+
+  app.listen(PORT, () => {
+    console.log(`Auth service listening in port ${PORT}`)
+  })
+}
+
+start()
