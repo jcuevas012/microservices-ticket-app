@@ -7,7 +7,12 @@ import mongoose from "mongoose"
 
 import NotFound from "./errors/not-found-error"
 import { errorHandler } from "./middlewares/error-handler"
-import { currentUserRouter, signInRouter, signUpRouter } from "./routes"
+import {
+  currentUserRouter,
+  signInRouter,
+  signOutRouter,
+  signUpRouter,
+} from "./routes"
 
 const app: Application = express()
 
@@ -26,6 +31,7 @@ app.use(
 app.use("/api/users", currentUserRouter)
 app.use("/api/users", signInRouter)
 app.use("/api/users", signUpRouter)
+app.use("/api/users", signOutRouter)
 
 app.all("*", () => {
   throw new NotFound()
