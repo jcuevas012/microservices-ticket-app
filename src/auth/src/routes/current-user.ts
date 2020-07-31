@@ -1,22 +1,17 @@
 import { Request, Response, Router } from "express"
 
-import utils from "../utils"
+import currentUser from "../middlewares/current-user"
+import requireAuth from "../middlewares/require-auth"
 
 const router = Router()
 
-router.get("/current-user", (req: Request, res: Response) => {
-  const jwt = req.session.jwt
-
-  if (!jwt) {
-    res.send({ currentUser: null })
+router.get(
+  "/current-user",
+  currentUser,
+  requireAuth,
+  (req: Request, res: Response) => {
+    res.send({ currentUser: req.currentUser || null })
   }
-
-  try {
-    const payload = utils.jwt.verify(jwt)
-    res.send({ currentUserRouter: payload })
-  } catch (error) {
-    res.send({ currentUser: null })
-  }
-})
+)
 
 export { router as currentUserRouter }
