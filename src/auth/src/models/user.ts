@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-import Password from "../utils/password"
+import utils from "../utils"
 
 // user attributes build
 
@@ -20,20 +20,32 @@ interface UserDoc extends mongoose.Document {
   password: string
 }
 
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-})
+  {
+    toJSON: {
+      transform(doc: any, ret: any) {
+        delete ret.password
+        ret.id = ret._id
+        delete ret._id
+      },
+    },
+    versionKey: false,
+  }
+)
 
 userSchema.pre("save", async function (done) {
   if (this.isModified("password")) {
-    const hasedPass = await Password.toHash(this.get("password"))
+    const hasedPass = await utils.password.toHash(this.get("password"))
     this.set("password", hasedPass)
   }
 })
