@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 let mongo: any
 
 beforeAll(async () => {
+    console.log('Before All')
     process.env.JWT_KEY = '212182hjhd'
 
     mongo = new MongoMemoryServer()
