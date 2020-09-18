@@ -1,30 +1,16 @@
-import { MongoMemoryServer } from 'mongodb-memory-server'
-import mongoose from 'mongoose'
+import dbHandler from './db-handler'
 
-let mongo: any
+/**
+ * Connect to a new in-memory database before running any tests.
+ */
+beforeAll(async () => await dbHandler.connect())
 
-beforeAll(async () => {
-    console.log('Before All')
-    process.env.JWT_KEY = '212182hjhd'
+/**
+ * Clear all test data after every test.
+ */
+afterEach(async () => await dbHandler.clearDatabase())
 
-    mongo = new MongoMemoryServer()
-    const mongoUri = await mongo.getUri()
-
-    mongoose.connect(mongoUri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-})
-
-beforeEach(async () => {
-    const collections = await mongoose.connection.db.collections()
-
-    for (const collection of collections) {
-        await collection.deleteMany({})
-    }
-})
-
-afterAll(async () => {
-    await mongoose.connection.close()
-    await mongo.stop()
-})
+/**
+ * Remove and close the db and server.
+ */
+afterAll(async () => await dbHandler.closeDatabase())
