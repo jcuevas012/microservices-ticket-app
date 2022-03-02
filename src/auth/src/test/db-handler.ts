@@ -3,13 +3,14 @@
 const mongoose = require('mongoose')
 const { MongoMemoryServer } = require('mongodb-memory-server')
 
-const mongod = new MongoMemoryServer()
+let mongod: any
 
 /**
  * Connect to the in-memory database.
  */
 const connect = async () => {
-    const uri = await mongod.getConnectionString()
+    mongod = await MongoMemoryServer.create()
+    const uri = await mongod.getUri()
 
     const mongooseOpts = {
         useNewUrlParser: true,

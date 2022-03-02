@@ -50,13 +50,13 @@ userSchema.statics.build = (userAttrs: UserAttrs) => {
     return new User(userAttrs)
 }
 
-const User = mongoose.model<UserDoc, UserModel>('User', userSchema)
-
 userSchema.pre('save', async function (done) {
     if (this.isModified('password')) {
         const hasedPass = await utils.password.toHash(this.get('password'))
         this.set('password', hasedPass)
     }
 })
+
+const User = mongoose.model<UserDoc, UserModel>('User', userSchema)
 
 export default User
