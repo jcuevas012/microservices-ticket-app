@@ -1,59 +1,62 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose'
 
-import utils from "../utils"
+import utils from '../utils'
 
 // user attributes build
 
 interface UserAttrs {
-  email: string
-  password: string
+    email: string
+    password: string
 }
 
-// user model define
+// Note: An interface that describes the properties that user model has,
+// add build function to model to restrict params in user creation
 interface UserModel extends mongoose.Model<UserDoc> {
-  build(attrs: UserAttrs): UserDoc
+    build(attrs: UserAttrs): UserDoc
 }
 
-// document interface define to return
+// Note: An interface that describes the properties that User document has,
+// value return from mongoose operations
 interface UserDoc extends mongoose.Document {
-  email: string
-  password: string
+    email: string
+    password: string
 }
 
 const userSchema = new mongoose.Schema(
-  {
-    email: {
-      type: String,
-      required: true,
+    {
+        email: {
+            type: String,
+            required: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
     },
-    password: {
-      type: String,
-      required: true,
+    {
+        toJSON: {
+            transform(doc: any, ret: any) {
+                delete ret.password
+                ret.id = ret._id
+                delete ret._id
+            },
+        },
+        versionKey: false,
     },
-  },
-  {
-    toJSON: {
-      transform(doc: any, ret: any) {
-        delete ret.password
-        ret.id = ret._id
-        delete ret._id
-      },
-    },
-    versionKey: false,
-  }
 )
 
-userSchema.pre("save", async function (done) {
-  if (this.isModified("password")) {
-    const hasedPass = await utils.password.toHash(this.get("password"))
-    this.set("password", hasedPass)
-  }
-})
-
+//Note: add custom build function to user schema in order to be access in User mongoose model
 userSchema.statics.build = (userAttrs: UserAttrs) => {
-  return new User(userAttrs)
+    return new User(userAttrs)
 }
 
-const User = mongoose.model<UserDoc, UserModel>("User", userSchema)
+const User = mongoose.model<UserDoc, UserModel>('User', userSchema)
+
+userSchema.pre('save', async function (done) {
+    if (this.isModified('password')) {
+        const hasedPass = await utils.password.toHash(this.get('password'))
+        this.set('password', hasedPass)
+    }
+})
 
 export default User

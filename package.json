@@ -1,6 +1,9 @@
 {
     "name": "ticket-app",
     "private": true,
+    "scripts": {
+        "start:dev": "skaffold dev"
+    },
     "packages": [
         "src/*"
     ],
