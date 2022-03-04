@@ -2,6 +2,7 @@
     "name": "ticket-app",
     "private": true,
     "scripts": {
+        "preinstall": "npx npm-force-resolutions",
         "start:dev": "skaffold dev"
     },
     "packages": [
