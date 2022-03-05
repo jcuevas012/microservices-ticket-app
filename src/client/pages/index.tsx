@@ -3,7 +3,6 @@ import Head from 'next/head'
 import buildClient from '../utils/client'
 
 const LandingPage: NextPage<{ currentUser: any }> = ({ currentUser }) => {
-    console.log(currentUser)
     return (
         <div className='min-h-full'>
             <Head>
@@ -46,8 +45,12 @@ const LandingPage: NextPage<{ currentUser: any }> = ({ currentUser }) => {
 }
 
 LandingPage.getInitialProps = async (context: NextPageContext) => {
+    let data
     const client = buildClient(context)
-    const { data } = await client.get('/api/users/current-user')
+    try {
+        const response = await client.get('/api/users/current-user')
+        data = response.data
+    } catch (error) {}
 
     return { ...data }
 }
