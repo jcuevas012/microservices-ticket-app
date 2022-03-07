@@ -1,9 +1,7 @@
 import { Request, Response, Router } from 'express'
 
-import BadRequestError from '../errors/bad-request-error'
-import requestValidator from '../middlewares/request-validator'
+import { BadRequestError, requestValidator, generateToken } from '@ticket-app/utils'
 import User from '../models/user'
-import utils from '../utils'
 import validation from '../validators/signup-validator'
 
 const router = Router()
@@ -26,7 +24,7 @@ router.post('/signup', [...validation], requestValidator, async (req: Request, r
 
     // generate jwt
 
-    const jwt = utils.jwt.generateToken({
+    const jwt = generateToken({
         id: user.id,
         email: user.email,
     })

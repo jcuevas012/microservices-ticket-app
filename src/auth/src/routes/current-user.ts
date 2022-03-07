@@ -1,7 +1,8 @@
 import { Request, Response, Router } from 'express'
+import { currentUser, requireAuth } from '@ticket-app/utils'
 
-import currentUser from '../middlewares/current-user'
-import requireAuth from '../middlewares/require-auth'
+// import currentUser from '../middlewares/current-user'
+// import requireAuth from '../middlewares/require-auth'
 
 const router = Router()
 

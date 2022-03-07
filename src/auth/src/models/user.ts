@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-import utils from '../utils'
+import utils from '../lib'
 
 // user attributes build
 
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
     },
     {
         toJSON: {
-            transform(doc: any, ret: any) {
+            transform(_doc: any, ret: any) {
                 delete ret.password
                 ret.id = ret._id
                 delete ret._id

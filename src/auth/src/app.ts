@@ -4,8 +4,7 @@ import { json } from 'body-parser'
 import cookieSession from 'cookie-session'
 import express, { Application } from 'express'
 
-import NotFound from './errors/not-found-error'
-import { errorHandler } from './middlewares/error-handler'
+import { NotFoundError, errorHandler } from '@ticket-app/utils'
 import { currentUserRouter, signInRouter, signOutRouter, signUpRouter } from './routes'
 
 const app: Application = express()
@@ -26,7 +25,7 @@ app.use('/api/users', signUpRouter)
 app.use('/api/users', signOutRouter)
 
 app.all('*', () => {
-    throw new NotFound()
+    throw new NotFoundError()
 })
 
 app.use(errorHandler)
