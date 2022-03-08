@@ -9,17 +9,17 @@ build:
         push: false
     artifacts:
         - image: jcq012/auth-service
-          context: src/auth
+          context: .
           docker:
-              dockerfile: Dockerfile
+              dockerfile: packages/ticket-auth/Dockerfile
           sync:
               manual:
                   - src: 'src/**/*.ts'
                     dest: .
         - image: jcq012/client
-          context: src/client
+          context: ./packages/ticket-client
           docker:
-              dockerfile: Dockerfile
+              dockerfile: packages/ticket-client/Dockerfile
           sync:
               manual:
                   - src: '**/*.ts'

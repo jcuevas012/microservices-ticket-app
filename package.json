@@ -2,13 +2,19 @@
     "name": "ticket-app",
     "private": true,
     "scripts": {
-        "start:dev": "skaffold dev"
+        "start:dev": "skaffold dev",
+        "dev": "lerna run dev --scope ",
+        "start": "lerna run start --stream",
+        "lint": "lerna run lint --stream",
+        "clean": "lerna run clean --stream",
+        "build": "lerna run build --stream",
+        "fix": "lerna run fix stream"
     },
     "packages": [
-        "src/*"
+        "packages/*"
     ],
     "workspaces": [
-        "src/*"
+        "packages/*"
     ],
     "devDependencies": {
         "@babel/core": "^7.16.7",
