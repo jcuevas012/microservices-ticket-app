@@ -16,6 +16,14 @@ build:
               manual:
                   - src: 'src/**/*.ts'
                     dest: .
+        - image: jcq012/ticket-main-service
+          context: .
+          docker:
+              dockerfile: packages/ticket-main/Dockerfile
+          sync:
+              manual:
+                  - src: 'src/**/*.ts'
+                    dest: .
         - image: jcq012/client
           context: ./packages/ticket-client
           docker:
