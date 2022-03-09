@@ -1,14 +1,14 @@
 {
-    "name": "ticket-app",
+    "name": "black-tickets",
     "private": true,
     "scripts": {
         "start:dev": "skaffold dev"
     },
     "packages": [
-        "src/*"
+        "packages/*"
     ],
     "workspaces": [
-        "src/*"
+        "packages/*"
     ],
     "devDependencies": {
         "@babel/core": "^7.16.7",
