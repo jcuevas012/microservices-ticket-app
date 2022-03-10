@@ -26,9 +26,9 @@ build:
                     dest: .
 
         - image: jcq012/client
-          context: packages/black-tickets-client
+          context: ./packages/black-tickets-client
           docker:
-              dockerfile: packages/ticket-client/Dockerfile
+              dockerfile: Dockerfile
           sync:
               manual:
                   - src: '**/*.ts'
