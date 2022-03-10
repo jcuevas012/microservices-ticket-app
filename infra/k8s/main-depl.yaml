@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: auth-depl
+    name: main-depl
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: auth
+            app: main
     template:
         metadata:
             labels:
-                app: auth
+                app: main
         spec:
             containers:
-                - name: auth
-                  image: jcq012/auth-service
+                - name: main
+                  image: jcq012/main-service
                   env:
                       - name: MONGO_URI
-                        value: mongodb://auth-mongo-srv:27017/auth
+                        value: mongodb://main-mongo-srv:27017/main
                       - name: JWT_KEY
                         valueFrom:
                             secretKeyRef:
@@ -28,12 +28,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: auth-srv
+    name: main-srv
 spec:
     selector:
-        app: auth
+        app: main
     ports:
-        - name: auth
+        - name: main
           protocol: TCP
           port: 3000
           targetPort: 3000
