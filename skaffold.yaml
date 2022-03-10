@@ -9,21 +9,22 @@ build:
         push: false
     artifacts:
         - image: jcq012/auth-service
-          context: packages/black-tickets-auth # run from
+          context: . # run from
           docker:
-              dockerfile: Dockerfile
+              dockerfile: ./packages/black-tickets-auth/Dockerfile
           sync:
               manual:
-                  - src: 'src/**/*.ts'
+                  - src: './packages/black-tickets-auth/src/**/*.ts'
                     dest: .
         - image: jcq012/main-service
-          context: packages/black-tickets-main # run from
+          context: . # run from
           docker:
-              dockerfile: Dockerfile
+              dockerfile: ./packages/black-tickets-main/Dockerfile
           sync:
               manual:
-                  - src: 'src/**/*.ts'
+                  - src: './packages/black-tickets-main/src/**/*.ts'
                     dest: .
+
         - image: jcq012/client
           context: packages/black-tickets-client
           docker:

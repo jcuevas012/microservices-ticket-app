@@ -11,7 +11,7 @@ interface UseRequestProps {
 const useRequest = (options: UseRequestProps) => {
     const [errors, setErrors] = useState<ReactElement | null>()
 
-    const request = async () => {
+    const request = async (): Promise<any> => {
         try {
             setErrors(null)
             const response = await axios[options.method](options.url, options.body)

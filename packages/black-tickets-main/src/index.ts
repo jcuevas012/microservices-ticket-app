@@ -5,8 +5,7 @@ import cookieSession from 'cookie-session'
 import express, { Application } from 'express'
 import mongoose from 'mongoose'
 
-// import NotFound from './errors/not-found-error'
-// import { errorHandler } from './middlewares/error-handler'
+import { errorHandler, NotFoundError } from '@black-tickets/utils'
 
 const app: Application = express()
 
@@ -21,12 +20,21 @@ app.use(
         secure: true,
     }),
 )
-
 app.get('/api/tickets/health', (_req, res) => {
-    res.status(200).send({ status: 'ok' })
+    res.status(200).send({ success: true })
 })
 
+app.all('*', () => {
+    throw new NotFoundError()
+})
+
+app.use(errorHandler)
+
 const start = async () => {
+    if (!process.env.JWT_KEY) {
+        throw new Error('JWT_KEY must be defined.')
+    }
+
     if (!process.env.MONGO_URI) {
         throw new Error('MONGO_URI must be defined in order to connect to db.')
     }
@@ -44,7 +52,9 @@ const start = async () => {
     }
 
     app.listen(PORT, () => {
-        console.log(`Tickets service listening in port ${PORT}`)
+        console.log(`======================================`)
+        console.log(`Main service listening in port ${PORT}`)
+        console.log(`======================================`)
     })
 }
 

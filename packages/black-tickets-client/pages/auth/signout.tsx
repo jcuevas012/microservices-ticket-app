@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import useRequest from '../../hooks/use-request'
 
-const SignInPage: NextPage = () => {
+const SignOutPage: NextPage = () => {
     const router = useRouter()
     const [request] = useRequest({
         method: 'post',
@@ -19,4 +19,4 @@ const SignInPage: NextPage = () => {
     return <p>Signing out ...</p>
 }
 
-export default SignInPage
+export default SignOutPage

@@ -4,6 +4,8 @@ import { json } from 'body-parser'
 import cookieSession from 'cookie-session'
 import express, { Application } from 'express'
 
+import { NotFoundError, errorHandler } from '@black-tickets/utils'
+
 const app: Application = express()
 
 app.set('trust proxy', 1) // trust first proxy
@@ -16,10 +18,10 @@ app.use(
     }),
 )
 
-// app.all('*', () => {
-//     throw new NotFound()
-// })
+app.all('*', () => {
+    throw new NotFoundError()
+})
 
-// app.use(errorHandler)
+app.use(errorHandler)
 
 export { app }

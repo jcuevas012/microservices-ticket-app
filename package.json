@@ -2,7 +2,9 @@
     "name": "black-tickets",
     "private": true,
     "scripts": {
-        "start:dev": "skaffold dev"
+        "start:dev": "skaffold dev",
+        "build": "lerna run build --stream",
+        "dev": "lerna run dev --stream"
     },
     "packages": [
         "packages/*"
@@ -11,6 +13,10 @@
         "packages/*"
     ],
     "devDependencies": {
+        "@types/cookie-session": "^2.0.41",
+        "@types/express": "^4.17.7",
+        "@types/jsonwebtoken": "^8.5.0",
+        "@types/mongoose": "^5.7.32",
         "@babel/core": "^7.16.7",
         "@babel/preset-env": "^7.16.8",
         "@babel/preset-typescript": "^7.16.7",
@@ -21,7 +27,18 @@
         "lerna": "^4.0.0",
         "mongodb-memory-server": "^8.1.0",
         "supertest": "^6.2.1",
-        "ts-jest": "^27.1.2"
+        "ts-jest": "^27.1.2",
+        "@types/node": "^14.11.2"
     },
-    "dependencies": {}
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cookie-session": "^1.4.0",
+        "express": "^4.17.1",
+        "express-async-errors": "^3.1.1",
+        "express-validator": "^6.6.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.9.25",
+        "ts-node-dev": "^1.0.0-pre.52",
+        "typescript": "^3.9.7"
+    }
 }

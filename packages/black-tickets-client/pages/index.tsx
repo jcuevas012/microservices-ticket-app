@@ -1,5 +1,6 @@
 import type { NextPage, NextPageContext } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import buildClient from '../utils/client'
 
 const LandingPage: NextPage<{ currentUser: any }> = ({ currentUser }) => {
@@ -19,22 +20,20 @@ const LandingPage: NextPage<{ currentUser: any }> = ({ currentUser }) => {
                         </h2>
                         <div className='mt-8 flex lg:mt-0 lg:flex-shrink-0'>
                             <div className='inline-flex rounded-md shadow'>
-                                <a
-                                    href='#'
-                                    className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700'
-                                >
-                                    {' '}
-                                    Buy Tickets{' '}
-                                </a>
+                                <Link href={'/tickets/buy'}>
+                                    <a className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700'>
+                                        {' '}
+                                        Buy Tickets{' '}
+                                    </a>
+                                </Link>
                             </div>
                             <div className='ml-3 inline-flex rounded-md shadow'>
-                                <a
-                                    href='#'
-                                    className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50'
-                                >
-                                    {' '}
-                                    Sell Tickets{' '}
-                                </a>
+                                <Link href={'/tickets/sell'}>
+                                    <a className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50'>
+                                        {' '}
+                                        Sell Tickets{' '}
+                                    </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
