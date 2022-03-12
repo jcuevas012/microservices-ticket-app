@@ -4,7 +4,8 @@ import { json } from 'body-parser'
 import cookieSession from 'cookie-session'
 import express, { Application } from 'express'
 
-import { NotFoundError, errorHandler } from '@black-tickets/utils'
+import { NotFoundError, errorHandler, currentUser } from '@black-tickets/utils'
+import { newTicketRouter, getTickets } from './routes'
 
 const app: Application = express()
 
@@ -17,6 +18,9 @@ app.use(
         secure: process.env.NODE_ENV != 'test',
     }),
 )
+app.use(currentUser)
+app.use('/api/tickets', newTicketRouter)
+app.use('/api/tickets', getTickets)
 
 app.all('*', () => {
     throw new NotFoundError()

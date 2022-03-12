@@ -1,21 +1,61 @@
-import dbHandler from './db-handler'
+import { MongoMemoryServer } from 'mongodb-memory-server'
+import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
 
+declare global {
+    namespace NodeJS {
+        interface Global {
+            signin(): string[]
+        }
+    }
+}
 
+let mongo: any
+beforeAll(async () => {
+    process.env.JWT_KEY = 'asdfasdf'
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
-/**
- * Connect to a new in-memory database before running any tests.
- */
-beforeAll(async () => await dbHandler.connect())
+    mongo = await MongoMemoryServer.create()
+    const mongoUri = await mongo.getUri()
 
-/**
- * Clear all test data after every test.
- */
-afterEach(async () => await dbHandler.clearDatabase())
+    await mongoose.connect(mongoUri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+})
 
-/**
- * Remove and close the db and server.
- */
-afterAll(async () => await dbHandler.closeDatabase())
+beforeEach(async () => {
+    const collections = await mongoose.connection.db.collections()
 
+    for (let collection of collections) {
+        await collection.deleteMany({})
+    }
+})
 
+afterAll(async () => {
+    await mongo.stop()
+    await mongoose.connection.close()
+})
 
+global.signin = () => {
+    // Build a JWT payload.  { id, email }
+    const payload = {
+        id: '1lk24j124l',
+        email: 'test@test.com',
+    }
+
+    // Create the JWT!
+    const token = jwt.sign(payload, process.env.JWT_KEY!)
+
+    // Build session Object. { jwt: MY_JWT }
+    const session = { jwt: token }
+
+    // Turn that session into JSON
+    const sessionJSON = JSON.stringify(session)
+
+    // Take JSON and encode it as base64
+    const base64 = Buffer.from(sessionJSON).toString('base64')
+
+    // return a string thats the cookie with the encoded data
+    return [`express:sess=${base64}`]
+}

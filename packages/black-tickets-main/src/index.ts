@@ -5,7 +5,8 @@ import cookieSession from 'cookie-session'
 import express, { Application } from 'express'
 import mongoose from 'mongoose'
 
-import { errorHandler, NotFoundError } from '@black-tickets/utils'
+import { currentUser, errorHandler, NotFoundError } from '@black-tickets/utils'
+import { newTicketRouter, getTickets } from './routes'
 
 const app: Application = express()
 
@@ -20,9 +21,14 @@ app.use(
         secure: true,
     }),
 )
+
 app.get('/api/tickets/health', (_req, res) => {
     res.status(200).send({ success: true })
 })
+
+app.use(currentUser)
+app.use('/api/tickets', newTicketRouter)
+app.use('/api/tickets', getTickets)
 
 app.all('*', () => {
     throw new NotFoundError()
