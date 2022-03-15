@@ -6,7 +6,7 @@ import express, { Application } from 'express'
 import mongoose from 'mongoose'
 
 import { currentUser, errorHandler, NotFoundError } from '@black-tickets/utils'
-import { newTicketRouter, getTickets } from './routes'
+import { newTicketRouter, getTickets, getTicketById, updateTicket } from './routes'
 
 const app: Application = express()
 
@@ -29,6 +29,8 @@ app.get('/api/tickets/health', (_req, res) => {
 app.use(currentUser)
 app.use('/api/tickets', newTicketRouter)
 app.use('/api/tickets', getTickets)
+app.use('/api/tickets', getTicketById)
+app.use('/api/tickets', updateTicket)
 
 app.all('*', () => {
     throw new NotFoundError()

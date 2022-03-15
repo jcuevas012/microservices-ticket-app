@@ -5,7 +5,7 @@ import cookieSession from 'cookie-session'
 import express, { Application } from 'express'
 
 import { NotFoundError, errorHandler, currentUser } from '@black-tickets/utils'
-import { newTicketRouter, getTickets } from './routes'
+import { newTicketRouter, getTickets, getTicketById } from './routes'
 
 const app: Application = express()
 
@@ -21,6 +21,7 @@ app.use(
 app.use(currentUser)
 app.use('/api/tickets', newTicketRouter)
 app.use('/api/tickets', getTickets)
+app.use('/api/tickets', getTicketById)
 
 app.all('*', () => {
     throw new NotFoundError()

@@ -7,10 +7,12 @@ const router = express.Router()
 
 router.post('/', requireAuth, newTicketValidator, requestValidator, async (req: Request, res: Response) => {
     const { title, price } = req.body
-    const ticket = Ticket.build({ title, price })
-    const newTicket = await ticket.save()
+    const { id } = req.currentUser
 
-    res.status(201).send(newTicket)
+    const ticket = Ticket.build({ title, price, userId: id })
+    await ticket.save()
+
+    res.status(201).send(ticket)
 })
 
 export { router as newTicketRouter }

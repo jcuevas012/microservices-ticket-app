@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 interface TicketAttrs {
     title: string
     price: number
+    userId: string
 }
 
 // Note: An interface that describes the properties that user model has,
@@ -18,6 +19,7 @@ interface TicketModel extends mongoose.Model<TicketDoc> {
 interface TicketDoc extends mongoose.Document {
     title: string
     price: number
+    userId: string
 }
 
 const ticketSchema = new mongoose.Schema(
@@ -30,9 +32,19 @@ const ticketSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
+        userId: {
+            type: String,
+            required: true,
+        },
     },
     {
         versionKey: false,
+        toJSON: {
+            transform(_doc, ret) {
+                ret.id = ret._id
+                delete ret._id
+            },
+        },
     },
 )
 

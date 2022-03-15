@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/', async (_req: Request, res: Response) => {
     const tickets = await Ticket.find()
-    res.status(201).send(tickets)
+    res.status(200).send(tickets)
 })
 
 export { router as getTickets }
