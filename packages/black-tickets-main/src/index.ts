@@ -48,15 +48,31 @@ const start = async () => {
         throw new Error('MONGO_URI must be defined in order to connect to db.')
     }
 
+    if (!process.env.NATS_URL) {
+        throw new Error('NATS_URL must be defined.')
+    }
+
+    if (!process.env.NATS_CLUSTER_ID) {
+        throw new Error('NATS_CLUSTER_ID must be defined in order to nats server.')
+    }
+
+    if (!process.env.NATS_CLIENT_ID) {
+        throw new Error(' NATS_CLIENT_ID must be defined in order to nats server.')
+    }
+
     try {
-        await natsWrapper.connect('ticket', 'client1h35', 'http://nats-srv:4222')
+        await natsWrapper.connect(
+            process.env.NATS_CLUSTER_ID, 
+            process.env.NATS_CLIENT_ID, 
+            process.env.NATS_URL)
+
         natsWrapper.client.on('close', () => {
-            console.log('NATS connection closed');
-            process.exit(0);
+            console.log('NATS connection closed')
+            process.exit();
         });
 
-        process.on('SIGINT', () => natsWrapper.client.close()); 
-        process.on('SIGTERM', () => natsWrapper.client.close());
+        process.on('SIGINT', () => natsWrapper.client.close())
+        process.on('SIGTERM', () => natsWrapper.client.close())
 
         await mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,
