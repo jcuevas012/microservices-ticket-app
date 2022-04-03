@@ -9,4 +9,9 @@ export {errorHandler} from './middlewares/error-handler';
 export {requestValidator} from './middlewares/request-validator';
 export {requireAuth} from './middlewares/require-auth';
 
+export {Publisher} from './events/publisher';
+export {Listener} from './events/listener';
+
+export * from './types';
+
 export {verify, generateToken} from './jwt';

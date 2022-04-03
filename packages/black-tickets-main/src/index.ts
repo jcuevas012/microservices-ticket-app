@@ -4,6 +4,7 @@ import { json } from 'body-parser'
 import cookieSession from 'cookie-session'
 import express, { Application } from 'express'
 import mongoose from 'mongoose'
+import natsWrapper from './nats-wrapper'
 
 import { currentUser, errorHandler, NotFoundError } from '@black-tickets/utils'
 import { newTicketRouter, getTickets, getTicketById, updateTicket } from './routes'
@@ -48,6 +49,15 @@ const start = async () => {
     }
 
     try {
+        await natsWrapper.connect('ticket', 'client1h35', 'http://nats-srv:4222')
+        natsWrapper.client.on('close', () => {
+            console.log('NATS connection closed');
+            process.exit(0);
+        });
+
+        process.on('SIGINT', () => natsWrapper.client.close()); 
+        process.on('SIGTERM', () => natsWrapper.client.close());
+
         await mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
