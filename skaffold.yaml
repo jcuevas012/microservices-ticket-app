@@ -24,7 +24,14 @@ build:
               manual:
                   - src: './packages/black-tickets-main/src/**/*.ts'
                     dest: .
-
+        - image: jcq012/order-service
+          context: . # run from
+          docker:
+              dockerfile: ./packages/black-tickets-order/Dockerfile
+          sync:
+              manual:
+                  - src: './packages/black-tickets-order/src/**/*.ts'
+                    dest: .
         - image: jcq012/client
           context: ./packages/black-tickets-client
           docker:
