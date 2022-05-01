@@ -7,7 +7,7 @@ import mongoose from 'mongoose'
 import natsWrapper from './nats-wrapper'
 
 import { currentUser, errorHandler, NotFoundError } from '@black-tickets/utils'
-// import { newTicketRouter, getTickets, getTicketById, updateTicket } from './routes'
+import { createOrder, getOrder, getOrders, deleteOrder } from './routes'
 
 const app: Application = express()
 
@@ -28,10 +28,10 @@ app.get('/api/orders/health', (_req, res) => {
 })
 
 app.use(currentUser)
-// app.use('/api/tickets', newTicketRouter)
-// app.use('/api/tickets', getTickets)
-// app.use('/api/tickets', getTicketById)
-// app.use('/api/tickets', updateTicket)
+app.use('/api/orders', getOrder)
+app.use('/api/orders', getOrders)
+app.use('/api/orders', createOrder)
+app.use('/api/orders', deleteOrder)
 
 app.all('*', () => {
     throw new NotFoundError()
