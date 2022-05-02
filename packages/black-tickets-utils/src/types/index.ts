@@ -25,3 +25,5 @@ export interface Event {
   subject: Subjects;
   data: any;
 }
+
+export * from './order.status';
