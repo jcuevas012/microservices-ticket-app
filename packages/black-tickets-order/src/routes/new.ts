@@ -4,7 +4,8 @@ import express, { Request, Response } from 'express'
 import * as mongoose  from 'mongoose'
 import { Ticket } from '../models/ticket'
 import {Order, OrderStatus} from '../models/order'
-// import Ticket from '../models/ticket'
+import  { OrderCreatedPublisher } from '../events/publishers/order-created-publisher'
+import natsWrapper from '../nats-wrapper'
 
 const router = express.Router()
 
@@ -17,6 +18,7 @@ router.post('/', requireAuth, [
     .withMessage("ticket id must be provided"),
 ], requestValidator, async (req: Request, res: Response) => {
 
+    const userId = req.currentUser.id
     const { ticketId } = req.body
     // Find existing ticket to order
 
@@ -43,13 +45,27 @@ router.post('/', requireAuth, [
     // create the order
 
     const order = await Order.build({
-        userId: req.currentUser.id,
+        userId,
         status: OrderStatus.Created,
         expiredAt: expirationTime.toString(),
         ticket
     })
 
+
     await order.save()
+
+    new OrderCreatedPublisher(natsWrapper.client).publish({
+        id: order.id,
+        status: order.status, 
+        expiredAt: expirationTime.toISOString(), 
+        userId,
+        ticket: {
+            id: ticket.id,
+            price: ticket.price
+        }
+    })
+
+    
 
     res.status(201).send(order)
 })
