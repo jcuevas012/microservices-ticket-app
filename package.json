@@ -4,7 +4,8 @@
     "scripts": {
         "start:dev": "skaffold dev",
         "build": "lerna run build --stream",
-        "dev": "lerna run dev --stream"
+        "dev": "lerna run dev --stream",
+        "bootstrap": "npx lerna bootstrap"
     },
     "packages": [
         "packages/*"
