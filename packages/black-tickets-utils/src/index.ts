@@ -15,3 +15,5 @@ export {Listener} from './events/listener';
 export * from './types';
 
 export {verify, generateToken} from './jwt';
+
+export {QUEUE_GROUP} from './types/queue-group';
