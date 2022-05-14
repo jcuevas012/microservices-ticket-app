@@ -8,6 +8,8 @@ import natsWrapper from './nats-wrapper'
 
 import { currentUser, errorHandler, NotFoundError } from '@black-tickets/utils'
 import { createOrder, getOrder, getOrders, deleteOrder } from './routes'
+import { TicketCreatedListener } from './events/listener/ticket-created-listener'
+import { TicketUpdatedListener } from './events/listener/ticket-updated-listener'
 
 const app: Application = express()
 
@@ -73,6 +75,9 @@ const start = async () => {
 
         process.on('SIGINT', () => natsWrapper.client.close())
         process.on('SIGTERM', () => natsWrapper.client.close())
+
+        new TicketCreatedListener(natsWrapper.client).listen()
+        new TicketUpdatedListener(natsWrapper.client).listen()
 
         await mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,

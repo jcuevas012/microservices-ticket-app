@@ -14,6 +14,7 @@ export class TicketCreatedListener extends  Listener<TicketCreatedEvent>{
             title,
             id
         })
+        
         await ticket.save()
 
         msg.ack()
