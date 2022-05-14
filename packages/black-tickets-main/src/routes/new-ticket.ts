@@ -18,6 +18,7 @@ router.post('/', requireAuth, newTicketValidator, requestValidator, async (req: 
         title: ticket.title,
         price: ticket.price,
         userId: id,
+        version: ticket.version  
     })
 
     res.status(201).send(ticket)

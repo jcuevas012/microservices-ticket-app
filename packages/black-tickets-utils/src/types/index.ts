@@ -7,6 +7,7 @@ interface Ticket {
   title: string;
   price: number;
   userId: string;
+  version: number;
 }
 
 interface Order {
