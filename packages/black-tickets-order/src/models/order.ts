@@ -1,4 +1,5 @@
 import { OrderStatus } from '@black-tickets/utils';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current'
 import mongoose from 'mongoose'
 import { TicketDoc } from './ticket';
 
@@ -15,7 +16,8 @@ interface OrderDoc extends mongoose.Document {
     userId: string;
     status: OrderStatus;
     expiredAt: string;
-    ticket: TicketDoc
+    ticket: TicketDoc;
+    version: number
 }
 interface OrderModel extends mongoose.Model<OrderDoc> {
     build(attrs: OrderAttrs): OrderDoc
@@ -49,6 +51,10 @@ const orderSchema = new mongoose.Schema({
         }
     }
 })
+
+
+orderSchema.set('versionKey', 'version')
+orderSchema.plugin(updateIfCurrentPlugin)
 
 orderSchema.statics.build = (attrs: OrderAttrs) => {
     return new Order(attrs)
