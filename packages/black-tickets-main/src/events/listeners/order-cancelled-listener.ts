@@ -1,23 +1,23 @@
-import { Listener, NotFoundError, OrderCreatedEvent, QUEUE_GROUP, Subjects } from "@black-tickets/utils";
+import { Listener, NotFoundError, OrderCancelledEvent, QUEUE_GROUP, Subjects } from "@black-tickets/utils";
 import { Message } from "node-nats-streaming";
 import Ticket from "../../models/ticket";
 import { TicketUpdatedPublisher } from "../publishers/ticket-updated-publisher";
 
-export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
+export class OrderCreatedListener extends Listener<OrderCancelledEvent> {
     groupQueueName: string = QUEUE_GROUP.TICKET;
 
-    subject: Subjects.ORDER_CREATED = Subjects.ORDER_CREATED;
+    subject: Subjects.ORDER_CANCELLED = Subjects.ORDER_CANCELLED;
 
-    async onMessage(data: OrderCreatedEvent['data'], msg: Message) {
-        const { ticket, id } = data
+    async onMessage(data: OrderCancelledEvent['data'], msg: Message) {
+        const { ticketId, id } = data
 
-        const ticketFound = await Ticket.findById(ticket.id)
+        const ticketFound = await Ticket.findOne({ id: ticketId, orderId: id})
 
         if (!ticketFound) {
             throw new NotFoundError('Not ticket found to reserve')
         }
         
-        ticketFound.set({orderId: id})
+        ticketFound.set({ orderId: undefined })
 
         await ticketFound.save()
 

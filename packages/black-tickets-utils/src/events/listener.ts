@@ -2,7 +2,7 @@ import {Message, Stan} from 'node-nats-streaming';
 import {Event} from '../types';
 
 export abstract class Listener<T extends Event> {
-  private client: Stan;
+  protected client: Stan;
   abstract subject: T['subject'];
   abstract groupQueueName: string;
   protected ackWait = 5 * 1000;

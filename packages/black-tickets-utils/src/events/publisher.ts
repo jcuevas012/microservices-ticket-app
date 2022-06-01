@@ -3,7 +3,7 @@ import {Event} from '../types';
 
 export abstract class Publisher<T extends Event> {
   abstract subject: T['subject'];
-  private client: Stan;
+  protected client: Stan;
 
   constructor(client: Stan) {
     this.client = client;

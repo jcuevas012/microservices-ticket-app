@@ -8,6 +8,7 @@ interface Ticket {
   price: number;
   userId: string;
   version: number;
+  orderId?: string;
 }
 
 interface Order {
@@ -15,6 +16,7 @@ interface Order {
   status: OrderStatus;
   expiredAt: string;
   userId: string;
+  version: number;
   ticket: {
     id: string;
     price: number;

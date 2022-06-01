@@ -21,7 +21,7 @@ interface TicketDoc extends mongoose.Document {
     price: number
     userId: string
     version: number
-    orderId?: number 
+    orderId?: string 
 }
 
 const ticketSchema = new mongoose.Schema(
