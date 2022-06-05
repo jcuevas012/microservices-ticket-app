@@ -58,10 +58,12 @@ router.post('/', requireAuth, [
         id: order.id,
         status: order.status, 
         expiredAt: expirationTime.toISOString(), 
+        version: order.version,
         userId,
         ticket: {
             id: ticket.id,
-            price: ticket.price
+            price: ticket.price,
+            version: ticket.version
         }
     })
 

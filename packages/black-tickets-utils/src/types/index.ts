@@ -20,6 +20,7 @@ interface Order {
   ticket: {
     id: string;
     price: number;
+    version: number;
   };
 }
 
