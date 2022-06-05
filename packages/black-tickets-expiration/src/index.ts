@@ -1,10 +1,15 @@
 
+import { OrderCreatedListener } from './events/listeners/order-created-listener'
 import natsWrapper from './nats-wrapper'
 
 
 
 
 const start = async () => {
+
+    if (!process.env.REDIS_HOST) {
+        throw new Error('REDIS_HOST must be defined.')
+    }
 
     if (!process.env.NATS_URL) {
         throw new Error('NATS_URL must be defined.')
@@ -31,6 +36,9 @@ const start = async () => {
 
         process.on('SIGINT', () => natsWrapper.client.close())
         process.on('SIGTERM', () => natsWrapper.client.close())
+
+        // event listener
+        new OrderCreatedListener(natsWrapper.client).listen()
 
 
     } catch (err) {

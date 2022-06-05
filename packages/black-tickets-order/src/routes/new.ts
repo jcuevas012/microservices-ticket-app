@@ -1,7 +1,6 @@
 import { BadRequestError, NotFoundError, requestValidator, requireAuth } from '@black-tickets/utils'
 import { body } from "express-validator"
 import express, { Request, Response } from 'express'
-import * as mongoose  from 'mongoose'
 import { Ticket } from '../models/ticket'
 import {Order, OrderStatus} from '../models/order'
 import  { OrderCreatedPublisher } from '../events/publishers/order-created-publisher'
@@ -9,12 +8,11 @@ import natsWrapper from '../nats-wrapper'
 
 const router = express.Router()
 
-const EXPIRATION_SECONDS = 15 * 60
+const EXPIRATION_SECONDS = 2 * 60
 
 router.post('/', requireAuth, [
     body("ticketId")
     .notEmpty()
-    .custom((input: string) => mongoose.Types.ObjectId.isValid(input))
     .withMessage("ticket id must be provided"),
 ], requestValidator, async (req: Request, res: Response) => {
 

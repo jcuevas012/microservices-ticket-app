@@ -24,6 +24,13 @@ interface Order {
   };
 }
 
+export interface ExpirationCompleteEvent {
+  subject: Subjects.EXPIRATION_COMPLETED;
+  data: {
+    orderId: string;
+  };
+}
+
 export interface OrderCreatedEvent {
   subject: Subjects.ORDER_CREATED;
   data: Order;
