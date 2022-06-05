@@ -8,6 +8,14 @@ build:
     local:
         push: false
     artifacts:
+        - image: jcq012/client
+          context: ./packages/black-tickets-client
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: '**/*.ts'
+                    dest: .
         - image: jcq012/auth-service
           context: . # run from
           docker:
@@ -23,7 +31,7 @@ build:
           sync:
               manual:
                   - src: './packages/black-tickets-main/src/**/*.ts'
-                    dest: .
+                    dest: .     
         - image: jcq012/order-service
           context: . # run from
           docker:
@@ -32,11 +40,11 @@ build:
               manual:
                   - src: './packages/black-tickets-order/src/**/*.ts'
                     dest: .
-        - image: jcq012/client
-          context: ./packages/black-tickets-client
+        - image: jcq012/expiration-service
+          context: . # run from
           docker:
-              dockerfile: Dockerfile
+              dockerfile: ./packages/black-tickets-expiration/Dockerfile
           sync:
               manual:
-                  - src: '**/*.ts'
+                  - src: './packages/black-tickets-expiration/src/**/*.ts'
                     dest: .
