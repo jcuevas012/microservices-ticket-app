@@ -26,7 +26,8 @@ router.delete('/:id', requireAuth, async (req: Request, res: Response) => {
 
     new OrderCancelledPublisher(natsWrapper.client).publish({
         id: order.id,
-        ticketId: order.ticket.id
+        ticketId: order.ticket.id,
+        version: order.version
     })
 
     res.status(204).send()

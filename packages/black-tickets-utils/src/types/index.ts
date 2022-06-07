@@ -41,6 +41,7 @@ export interface OrderCancelledEvent {
   data: {
     id: string;
     ticketId: string;
+    version: number;
   };
 }
 
