@@ -8,7 +8,7 @@ export { OrderStatus }
 interface OrderAttrs {
     id: string;
     userId: string;
-    version: string;
+    version: number;
     status: OrderStatus;
     price: number;
 }
@@ -16,7 +16,7 @@ interface OrderAttrs {
 interface OrderDoc extends mongoose.Document {
     id: string;
     userId: string;
-    version: string;
+    version: number;
     status: OrderStatus;
     price: number;
 }
