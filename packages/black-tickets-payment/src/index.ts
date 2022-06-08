@@ -7,7 +7,7 @@ import mongoose from 'mongoose'
 import natsWrapper from './nats-wrapper'
 
 import { currentUser, errorHandler, NotFoundError } from '@black-tickets/utils'
-import {  getOrder } from './routes'
+import {  newPayment } from './routes'
 import { OrderCreatedListener } from './events/listeners/order-created-listener'
 import { OrderCancelledListener } from './events/listeners/order-cancelled-listener'
 
@@ -30,7 +30,7 @@ app.get('/api/payments/health', (_req, res) => {
 })
 
 app.use(currentUser)
-app.use('/api/payments', getOrder)
+app.use('/api/payments', newPayment)
 
 app.all('*', () => {
     throw new NotFoundError()

@@ -6,7 +6,7 @@ import { Order } from "../../models/order";
 export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
     groupQueueName: string = QUEUE_GROUP.PAYMENT;
 
-    subject: Subjects.ORDER_CREATED = Subjects.ORDER_CREATED;
+    subject: Subjects.ORDER_CANCELLED = Subjects.ORDER_CANCELLED;
 
     async onMessage(data: OrderCancelledEvent['data'], msg: Message) {
 
