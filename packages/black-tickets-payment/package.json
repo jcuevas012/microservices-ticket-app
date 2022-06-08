@@ -1,0 +1,31 @@
+{
+  "name": "@black-tickets/payment",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "Jorge Cuevas <jcq012@gmail.com>",
+  "homepage": "https://github.com/jcuevas012/microservices-ticket-app#readme",
+  "license": "ISC",
+  "main": "build/index.js",
+  "directories": {
+    "lib": "src"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcuevas012/microservices-ticket-app.git"
+  },
+  "scripts": {
+    "dev": "yarn ts-node-dev src/index.ts",
+    "build-ts": "tsc",
+    "start": "npm run build-ts && node dist/index.js",
+    "test": "NODE_ENV=test && jest --watchAll --cache"
+  },
+  "bugs": {
+    "url": "https://github.com/jcuevas012/microservices-ticket-app/issues"
+  },
+  "dependencies": {
+    "mongoose-update-if-current": "^1.4.0"
+  }
+}

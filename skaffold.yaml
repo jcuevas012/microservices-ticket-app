@@ -48,3 +48,11 @@ build:
               manual:
                   - src: './packages/black-tickets-expiration/src/**/*.ts'
                     dest: .
+        - image: jcq012/payment-service
+          context: . # run from
+          docker:
+              dockerfile: ./packages/black-tickets-payment/Dockerfile
+          sync:
+              manual:
+                  - src: './packages/black-tickets-payment/src/**/*.ts'
+                    dest: .
