@@ -45,6 +45,15 @@ export interface OrderCancelledEvent {
   };
 }
 
+export interface PaymentCreatedEvent {
+  subject: Subjects.PAYMENT_CREATED;
+  data: {
+    id: string;
+    orderId: string;
+    stripeId: string;
+  };
+}
+
 export interface TicketCreatedEvent {
   subject: Subjects.TICKET_CREATED;
   data: Ticket;

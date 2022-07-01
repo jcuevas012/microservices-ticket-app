@@ -11,6 +11,7 @@ import { createOrder, getOrder, getOrders, deleteOrder } from './routes'
 import { TicketCreatedListener } from './events/listener/ticket-created-listener'
 import { TicketUpdatedListener } from './events/listener/ticket-updated-listener'
 import { ExpirationCompleteListner } from './events/listener/expiration-complete-listener'
+import { PaymentCreatedListener } from './events/listener/payment-created-listener'
 
 const app: Application = express()
 
@@ -79,6 +80,7 @@ const start = async () => {
 
         // event listner
         new ExpirationCompleteListner(natsWrapper.client).listen()
+        new PaymentCreatedListener(natsWrapper.client).listen()
         new TicketCreatedListener(natsWrapper.client).listen()
         new TicketUpdatedListener(natsWrapper.client).listen()
 
