@@ -15,6 +15,9 @@ spec:
             containers:
                 - name: auth
                   image: jcq012/auth-service
+                  resources:
+                    limits:
+                        memory: '512M'
                   env:
                       - name: MONGO_URI
                         value: mongodb://auth-mongo-srv:27017/auth

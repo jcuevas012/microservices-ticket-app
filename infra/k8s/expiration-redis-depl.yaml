@@ -15,6 +15,9 @@ spec:
       containers:
         - name: expiration-redis
           image: redis
+          resources:
+                    limits:
+                        memory: '512M'
 
 ---
 apiVersion: v1

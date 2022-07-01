@@ -15,6 +15,9 @@ spec:
             containers:
                 - name: nats
                   image: nats-streaming:0.17.0
+                  resources:
+                    limits:
+                        memory: '512M'
                   args: ['-p', '4222', '-m', '8222', '-hbi', '5s', '-hbf', '2', '-SD', '-cid', 'ticket']
 ---
 apiVersion: v1

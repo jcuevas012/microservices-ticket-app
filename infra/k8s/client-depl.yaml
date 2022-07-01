@@ -15,6 +15,9 @@ spec:
             containers:
                 - name: client
                   image: jcq012/client
+                  resources:
+                    limits:
+                        memory: '512M'
 
 ---
 apiVersion: v1

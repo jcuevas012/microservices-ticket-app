@@ -15,6 +15,9 @@ spec:
             containers:
                 - name: expiration
                   image: jcq012/expiration-service
+                  resources:
+                    limits:
+                        memory: '512M'
                   env:
                       - name: NATS_CLIENT_ID
                         valueFrom:

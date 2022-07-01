@@ -15,6 +15,9 @@ spec:
             containers:
                 - name: order
                   image: jcq012/order-service
+                  resources:
+                    limits:
+                        memory: '1000M'
                   env:
                       - name: NATS_CLIENT_ID
                         valueFrom:

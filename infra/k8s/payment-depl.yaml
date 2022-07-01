@@ -15,6 +15,9 @@ spec:
             containers:
                 - name: payment
                   image: jcq012/payment-service
+                  resources:
+                    limits:
+                        memory: '1024M'
                   env:
                       - name: NATS_CLIENT_ID
                         valueFrom:
