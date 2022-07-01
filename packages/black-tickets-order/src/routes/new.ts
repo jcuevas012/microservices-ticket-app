@@ -8,7 +8,7 @@ import natsWrapper from '../nats-wrapper'
 
 const router = express.Router()
 
-const EXPIRATION_SECONDS = 1 * 60
+const EXPIRATION_SECONDS = 1 * 6000
 
 router.post('/', requireAuth, [
     body("ticketId")
