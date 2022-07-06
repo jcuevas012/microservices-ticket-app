@@ -12,7 +12,10 @@ function AppComponent({ Component, pageProps, currentUser }: AppProps | any) {
             }}
         >
             <Header currentUser={currentUser} />
-            <Component {...pageProps} />
+            <div className="container mx-auto">
+                <Component currentUser={currentUser} {...pageProps} />
+            </div>
+            
         </SWRConfig>
     )
 }
@@ -29,7 +32,7 @@ AppComponent.getInitialProps = async (appContext: AppContext) => {
     let pageProps = {}
 
     if (appContext.Component.getInitialProps) {
-        pageProps = await appContext.Component.getInitialProps(appContext.ctx)
+        pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser)
     }
 
     return {
