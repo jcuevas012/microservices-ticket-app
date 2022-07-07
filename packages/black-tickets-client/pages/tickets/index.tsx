@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
 
 const TicketList: NextPage = ({ data = [] }) => {
     return  (
@@ -13,7 +14,9 @@ const TicketList: NextPage = ({ data = [] }) => {
                         <th scope="col" className="px-6 py-3">
                             Price
                         </th>
-                        
+                        <th scope="col" className="px-6 py-3">
+                            Info
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,6 +27,11 @@ const TicketList: NextPage = ({ data = [] }) => {
                                 </th>
                                 <td className="px-6 py-4">
                                     {`${ticket.price}`}
+                                </td>
+                                <td className="px-6 py-4">
+                                    <Link href={'/tickets[ticketId]'} as={`/tickets/${ticket.id}`}>
+                                        <a>View</a>
+                                    </Link>
                                 </td>
                         </tr>
                     ))}

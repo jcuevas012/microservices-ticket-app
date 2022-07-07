@@ -17,7 +17,7 @@ const useRequest = (options: UseRequestProps) => {
             const response = await axios[options.method](options.url, options.body)
 
             if (options.onSuccess) {
-                options.onSuccess()
+                options.onSuccess(response.data)
             }
 
             return response.data
