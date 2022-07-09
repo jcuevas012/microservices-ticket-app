@@ -55,7 +55,7 @@ const start = async () => {
     }
 
     app.listen(PORT, () => {
-        console.log(`======================================>`)
+        console.log(`======================================>>`)
         console.log(`Auth service listening in port ${PORT}`)
         console.log(`======================================>`)
     })
