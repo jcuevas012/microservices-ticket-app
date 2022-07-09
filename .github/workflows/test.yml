@@ -22,11 +22,11 @@ jobs:
         npm set @xcanchal:registry=https://npm.pkg.github.com/xcanchal
         npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
 
-    - name: Use yarn 
+    - name: Yarn Install 
       run: yarn install --frozen-lockfile
 
-    - name: Install dependencies
-      run: npx lerna bootstrap
+    - name: Bootstrap dependencies
+      run: yarn bootstrap
 
     - name: Run tests # Run tests of all packages
       run: npx lerna exec npm run test
