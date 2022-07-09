@@ -11,10 +11,10 @@ interface UseRequestProps {
 const useRequest = (options: UseRequestProps) => {
     const [errors, setErrors] = useState<ReactElement | null>()
 
-    const request = async (): Promise<any> => {
+    const request = async (params = {}): Promise<any> => {
         try {
             setErrors(null)
-            const response = await axios[options.method](options.url, options.body)
+            const response = await axios[options.method](options.url, { ...options.body, ...params})
 
             if (options.onSuccess) {
                 options.onSuccess(response.data)

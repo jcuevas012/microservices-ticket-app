@@ -7,9 +7,6 @@ const TicketView: NextPage = ({ ticket }) => {
     const router = useRouter()
 
     const onSuccess = (order: any) => {
-        console.log('complete order') 
-        console.log(order)
-
           router.push({
             pathname: '/orders/[orderId]',
             query: { orderId: order.id }
