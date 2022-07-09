@@ -15,4 +15,4 @@ jobs:
 
 
      - name: Run auth service test
-       run: cd packages/black-tickets-auth/ && yarn run test:ci
+       run: yarn install && cd packages/black-tickets-auth/ && yarn run test:ci
