@@ -13,6 +13,8 @@ jobs:
      - name: Install Dependency
        run: yarn install
 
+     - name: Bootstrap
+       run: yarn bootstrap
 
      - name: Run auth service test
        run: cd packages/black-tickets-auth/ && yarn run test:ci
