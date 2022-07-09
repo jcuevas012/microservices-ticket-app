@@ -22,6 +22,7 @@ jobs:
         npm set @xcanchal:registry=https://npm.pkg.github.com/xcanchal
         npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
 
+<<<<<<< HEAD
     - name: Use yarn 
       uses: borales/actions-yarn@v3.0.0
       with: 
@@ -29,6 +30,13 @@ jobs:
 
     - name: Install dependencies
       run: npx lerna bootstrap
+=======
+    - name: Yarn Install 
+      run: yarn install --frozen-lockfile
+
+    - name: Bootstrap dependencies
+      run: npx lerna bootstrap --hoist
+>>>>>>> 19ddbe1b255aa56cf1d7d2f0dc9ea63f5b4bdbc2
 
     - name: Run tests # Run tests of all packages
       run: npx lerna exec npm run test
