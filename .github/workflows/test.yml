@@ -9,4 +9,10 @@ jobs:
     steps:
      - uses: actions/checkout@v2
      - uses: borales/actions-yarn@v3.0.0
-     - run: cd packages/black-tickets-auth/ && yarn install && yarn run test:ci
+
+     - name: Install Dependency
+       run: yarn install
+
+
+     - name: Run auth service test
+       run: cd packages/black-tickets-auth/ && yarn run test:ci
