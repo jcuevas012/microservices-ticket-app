@@ -27,7 +27,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-          yarn install
+          yarn install --frozen-lockfile
           npx lerna bootstrap
 
     - name: Run tests # Run tests of all packages
