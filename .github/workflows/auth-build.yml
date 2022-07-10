@@ -1,9 +1,9 @@
 name: auth-build
 
 on:
-  pull_request:
-    paths:
-      - 'packages/black-tickets-auth/**'
+  pull_request
+    # paths:
+    #   - 'packages/black-tickets-auth/**'
 
 jobs:
   build:
