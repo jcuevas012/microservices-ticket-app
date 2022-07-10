@@ -98,7 +98,7 @@ const start = async () => {
     app.listen(PORT, () => {
         console.log(`======================================`)
         console.log(`Order service listening in port ${PORT}`)
-        console.log(`======================================`)
+        console.log(`======================================>>>>`)
     })
 }
 
