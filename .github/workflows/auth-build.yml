@@ -2,7 +2,6 @@ name: auth-build
 
 on:
   pull_request:
-    branches: [ "master" ]
     paths:
       - 'packages/black-tickets-auth/**'
 
