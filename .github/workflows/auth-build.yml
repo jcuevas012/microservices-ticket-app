@@ -3,11 +3,13 @@ name: auth-build
 on:
   pull_request:
     branches: [ "master" ]
+    paths:
+      - 'packages/black-tickets-auth/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run a one-line script
+      - name: Build Image and Run Test
         run: docker build -f packages/black-tickets-auth/Dockerfile -t jcq012/auth-service .
