@@ -5,6 +5,7 @@
         "start:dev": "skaffold dev",
         "build": "lerna run build --stream",
         "dev": "lerna run dev --stream",
+        "start": "lerna run start --stream",
         "bootstrap": "npx lerna bootstrap"
     },
     "packages": [
