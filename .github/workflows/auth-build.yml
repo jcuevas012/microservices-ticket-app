@@ -9,7 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: "Checkout"
-      uses: actions/checkout@v2
-      run:  docker build -f packages/black-tickets-auth/Dockerfile -t jcq012/auth-service .
+      - uses: actions/checkout@v2
+      - run:  docker build -f packages/black-tickets-auth/Dockerfile -t jcq012/auth-service .
 
