@@ -20,10 +20,11 @@ RUN yarn run build
 
 RUN yarn install
 
+RUN cd packages/black-tickets-expiration && yarn run test:ci
 
 #expose port to the host
 EXPOSE  3000
 
 
-CMD ["yarn", "run", "dev"]
+CMD ["yarn", "run", "start"]
 # CMD [ "yarn", "run", "dev"]
