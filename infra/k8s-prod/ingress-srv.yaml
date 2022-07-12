@@ -9,7 +9,7 @@ metadata:
 spec:
     ingressClassName: nginx
     rules:
-        - host: wwww.black-ticket-rd.shop.com
+        - host: www.black-ticket-rd.shop
           http:
               paths:
                   - path: /api/users/?(.*)
