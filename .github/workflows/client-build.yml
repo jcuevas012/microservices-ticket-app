@@ -1,4 +1,4 @@
-name: auth-build
+name: client-build
 
 on:
   pull_request:
