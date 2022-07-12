@@ -1,0 +1,20 @@
+name: auth-deploy
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - 'packages/black-tickets-auth/**'
+    
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - run: doctl kubernetes cluster kubeconfig save tickets
+      - run: kubectl rollout restart deployment auth-depl
+            
