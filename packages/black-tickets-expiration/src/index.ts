@@ -6,6 +6,7 @@ import natsWrapper from './nats-wrapper'
 
 
 const start = async () => {
+    console.log(`Starting Expiration service .....`)
 
     if (!process.env.REDIS_HOST) {
         throw new Error('REDIS_HOST must be defined.')
