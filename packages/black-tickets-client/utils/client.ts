@@ -5,7 +5,7 @@ const buildClient = (context: NextPageContext) => {
     try {
         if (typeof window === 'undefined') {
             return axios.create({
-                baseURL: 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
+                baseURL: 'http://www.black-ticket-rd.shop',
                 headers: { ...context.req?.headers } as AxiosRequestHeaders,
             })
         }

@@ -4,10 +4,12 @@ metadata:
     name: ingress-service
     annotations:
       nginx.ingress.kubernetes.io/use-regex: "true"
+      service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
+      service.beta.kubernetes.io/do-loadbalancer-hostname: 'www.black-ticket-rd.shop'
 spec:
     ingressClassName: nginx
     rules:
-        - host: tickets.dev
+        - host: wwww.black-ticket-rd.shop.com
           http:
               paths:
                   - path: /api/users/?(.*)
