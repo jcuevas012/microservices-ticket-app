@@ -19,8 +19,9 @@
   "scripts": {
     "dev": "yarn ts-node-dev src/index.ts",
     "build-ts": "tsc",
-    "start": "npm run build-ts && node dist/index.js",
-    "test": "NODE_ENV=test && jest --watchAll --cache"
+    "start": "npm run build-ts && node build/index.js",
+    "test": "NODE_ENV=test && jest --watchAll --cache",
+    "test:ci": "jest"
   },
   "bugs": {
     "url": "https://github.com/jcuevas012/microservices-ticket-app/issues"

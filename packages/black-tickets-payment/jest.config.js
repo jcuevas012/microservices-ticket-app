@@ -5,6 +5,7 @@ module.exports = {
     setupFilesAfterEnv: ['./src/test/setup.ts'],
     moduleFileExtensions: ['ts', 'js'],
     transformIgnorePatterns: ['/node_modules/'],
+    testPathIgnorePatterns: ["build"],
     transform: {
         '^.+\\.(js|ts)$': 'ts-jest',
     },

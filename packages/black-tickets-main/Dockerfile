@@ -15,15 +15,15 @@ RUN yarn install
 COPY ./packages/black-tickets-utils ./packages/black-tickets-utils
 COPY ./packages/black-tickets-main ./packages/black-tickets-main
 
-
 RUN yarn run build
 
 RUN yarn install
 
+RUN cd packages/black-tickets-main && yarn run test:ci
 
 #expose port to the host
 EXPOSE  3000
 
 
-CMD ["yarn", "run", "dev"]
+CMD ["yarn", "run", "start"]
 # CMD [ "yarn", "run", "dev"]
