@@ -40,6 +40,7 @@ app.all('*', () => {
 app.use(errorHandler)
 
 const start = async () => {
+    console.log(`Starting Main Ticket service .....`)
     if (!process.env.JWT_KEY) {
         throw new Error('JWT_KEY must be defined.')
     }

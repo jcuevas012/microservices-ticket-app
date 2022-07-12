@@ -39,6 +39,8 @@ app.all('*', () => {
 app.use(errorHandler)
 
 const start = async () => {
+    console.log(`Payment Auth service .....`)
+
     if (!process.env.JWT_KEY) {
         throw new Error('JWT_KEY must be defined.')
     }
