@@ -5,17 +5,17 @@ RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-COPY package.json  ./
+COPY package.json package-lock.json  ./
 
-RUN yarn install --frozen-lockfile
+RUN npm install 
 
 COPY . .
 
 #expose port to the host
 EXPOSE  3000
 
-RUN yarn run build --scope @black-tickets/client
+RUN npm run build 
 
-CMD ["yarn", "run", "start"]
+CMD ["npm", "run", "start"]
 
 
