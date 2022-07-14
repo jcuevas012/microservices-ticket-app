@@ -36,7 +36,7 @@ const OrderList: NextPage = ({ data = [] }) => {
                                     {`${order.status}`}
                                 </td>
                                 <td className="px-6 py-4">
-                                    <Link href={'/orders/[orderId]'} as={`/orders/${order.id}`}>
+                                    <Link href={`/orders/${order.id}`} >
                                         <a>View</a>
                                     </Link>
                                 </td>

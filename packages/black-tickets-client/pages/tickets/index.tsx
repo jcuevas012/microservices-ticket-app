@@ -29,7 +29,7 @@ const TicketList: NextPage = ({ data = [] }) => {
                                     {`${ticket.price}`}
                                 </td>
                                 <td className="px-6 py-4">
-                                    <Link href={'/tickets[ticketId]'} as={`/tickets/${ticket.id}`}>
+                                    <Link href={`/tickets/${ticket.id}`}>
                                         <a>View</a>
                                     </Link>
                                 </td>
