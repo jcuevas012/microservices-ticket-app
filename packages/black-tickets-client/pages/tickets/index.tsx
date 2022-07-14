@@ -1,7 +1,6 @@
-import type { NextPage } from 'next'
 import Link from 'next/link'
 
-const TicketList: NextPage = ({ data = [] }) => {
+const TicketList = ({ data = [] }: any) => {
     return  (
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -42,7 +41,7 @@ const TicketList: NextPage = ({ data = [] }) => {
     
 }
 
-
+// @ts-ignore
 TicketList.getInitialProps = async (_appContext, client) =>  {
 
     const response = await client.get('/api/tickets')

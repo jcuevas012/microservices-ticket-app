@@ -32,10 +32,10 @@ const NewTicketPage: NextPage = () => {
 
     }
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e: any) => {
         e.preventDefault()
-
-        const response = await request()
+        //@ts-ignore
+        await request()
     }
 
      return (

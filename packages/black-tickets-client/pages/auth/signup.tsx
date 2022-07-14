@@ -15,8 +15,9 @@ const SignUpPage: NextPage = () => {
         onSuccess: () => router.push('/'),
     })
 
-    const onSubmit = async (e: Event) => {
+    const onSubmit = async (e: any) => {
         e.preventDefault()
+        // @ts-ignore
         await request()
     }
     return (
@@ -32,7 +33,7 @@ const SignUpPage: NextPage = () => {
                             Sign up to your account
                         </h2>
                     </div>
-                    <form className='mt-8 space-y-6' onSubmit={onSubmit}>
+                    <form className='mt-8 space-y-6' onSubmit={(e) => onSubmit(e)} >
                         <input type='hidden' name='remember' value='true' />
                         <div className='rounded-md shadow-sm -space-y-px'>
                             <div>

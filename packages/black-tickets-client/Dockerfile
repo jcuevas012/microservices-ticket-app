@@ -11,5 +11,7 @@ COPY . .
 #expose port to the host
 EXPOSE  3000
 
+RUN npm run build:next
 
-CMD ["yarn", "run", "dev"]
+
+CMD ["yarn", "run", "start"]

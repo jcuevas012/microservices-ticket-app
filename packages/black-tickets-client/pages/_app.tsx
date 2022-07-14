@@ -33,6 +33,7 @@ AppComponent.getInitialProps = async (appContext: AppContext) => {
 
     if (appContext.Component.getInitialProps) {
         // this is passing client http and current user to all pages
+        // @ts-ignore
         pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data?.currentUser)
     }
 

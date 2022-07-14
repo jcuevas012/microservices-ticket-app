@@ -1,11 +1,10 @@
-import type { NextPage } from 'next'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react'
 import StripeCheckout from 'react-stripe-checkout';
 
 import useRequest from '../../hooks/use-request'
 
-const OrderView: NextPage = ({ order, currentUser }) => {
+const OrderView = ({ order, currentUser }: any) => {
     const [expirationTime, setExpirationTime] = useState<number>()
     const router  = useRouter()
     
@@ -15,11 +14,12 @@ const OrderView: NextPage = ({ order, currentUser }) => {
         body: {
             orderId: order.id, 
         }, 
-        onSuccess: (payment) => router.push('/orders')
+        onSuccess: () => router.push('/orders')
     })
 
     useEffect(() => {
         const calExpirationTime = () => {
+            // @ts-ignore
             const timeLeft: number = Math.round(new Date(`${order.expiredAt}`) - new Date() / 1000);
             setExpirationTime(timeLeft)
         }
@@ -33,10 +33,12 @@ const OrderView: NextPage = ({ order, currentUser }) => {
         }
     }, [order])
 
-    const onToken = async (token) => {
+    const onToken = async (token: any) => {
+        // @ts-ignore
         await request({ token: token.id })
     }
 
+    // @ts-ignore
     if (expirationTime < 0) {
         return (
                 <div className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -64,7 +66,8 @@ const OrderView: NextPage = ({ order, currentUser }) => {
 
 }
 
-OrderView.getInitialProps = async (context, client, currentUser) => {
+// @ts-ignore
+OrderView.getInitialProps = async (context: any, client, currentUser) => {
 
     const { orderId } = context.query;
 

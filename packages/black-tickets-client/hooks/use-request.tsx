@@ -11,7 +11,7 @@ interface UseRequestProps {
 const useRequest = (options: UseRequestProps) => {
     const [errors, setErrors] = useState<ReactElement | null>()
 
-    const request = async (params = {}): Promise<any> => {
+    const request = async (params = {}) => {
         try {
             setErrors(null)
             const response = await axios[options.method](options.url, { ...options.body, ...params})
@@ -20,7 +20,6 @@ const useRequest = (options: UseRequestProps) => {
                 options.onSuccess(response.data)
             }
 
-            return response.data
         } catch (error: any) {
             const errors = error.response?.data?.errors
             setErrors(errors && errors.map((err: any, i: number) => <div key={i}>{err.message}</div>))
