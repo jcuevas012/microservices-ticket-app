@@ -14,8 +14,7 @@ COPY . .
 #expose port to the host
 EXPOSE  3000
 
-RUN yarn run build
-
+RUN yarn run build --scope @black-tickets/client
 
 CMD ["yarn", "run", "start"]
 
