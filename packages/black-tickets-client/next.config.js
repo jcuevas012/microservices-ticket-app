@@ -6,7 +6,10 @@ const nextConfig = {
         return config
     },
     images: {
-        domains: ['tailwindui.com', 'images.unsplash.com', 'unsplash.com'],
+        domains: [
+        'tailwindui.com', 
+        'images.unsplash.com', 
+        'unsplash.com'],
     },
 }
 
