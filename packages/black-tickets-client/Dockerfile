@@ -12,8 +12,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm ci
-
 #expose port to the host
 EXPOSE  3000
 
