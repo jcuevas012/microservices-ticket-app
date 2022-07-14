@@ -1,4 +1,5 @@
 import axios, { AxiosRequestHeaders } from 'axios'
+import { NextPageContext } from 'next'
 
 const buildClient = (context: NextPageContext) => {
   try {
