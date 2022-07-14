@@ -157,7 +157,7 @@ const Dashboard: NextPage = () => {
                                 aria-expanded='false'
                             >
                                 <span className='sr-only'>Open main menu</span>
-                                Heroicon name: outline/menu Menu open: "hidden", Menu closed: "block"
+                                Heroicon name: outline/menu Menu open: 
                                 <svg
                                     className='block h-6 w-6'
                                     xmlns='http://www.w3.org/2000/svg'
@@ -173,7 +173,7 @@ const Dashboard: NextPage = () => {
                                         d='M4 6h16M4 12h16M4 18h16'
                                     />
                                 </svg>
-                                Heroicon name: outline/x Menu open: "block", Menu closed: "hidden"
+                                Heroicon name: outline/x Menu open:
                                 <svg
                                     className='hidden h-6 w-6'
                                     xmlns='http://www.w3.org/2000/svg'

@@ -1,8 +1,7 @@
-import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import useRequest from '../../hooks/use-request'
 
-const TicketView: NextPage = ({ ticket }) => {
+const TicketView = ({ ticket }: any) => {
 
     const router = useRouter()
 
@@ -23,6 +22,7 @@ const TicketView: NextPage = ({ ticket }) => {
     })
 
     const onClick = async () => {
+        // @ts-ignore
         await request()
     }
 
@@ -42,6 +42,7 @@ const TicketView: NextPage = ({ ticket }) => {
 
 }
 
+// @ts-ignore
 TicketView.getInitialProps = async (context, client) => {
 
     const { ticketId } = context.query;

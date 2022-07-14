@@ -1,7 +1,6 @@
-import type { NextPage } from 'next'
 import Link from 'next/link'
 
-const OrderList: NextPage = ({ data = [] }) => {
+const OrderList = ({ data = [] }) => {
 
     return  (
 
@@ -50,7 +49,7 @@ const OrderList: NextPage = ({ data = [] }) => {
 }
 
 
-OrderList.getInitialProps = async (_appContext, client) =>  {
+OrderList.getInitialProps = async (_appContext:any, client: any) =>  {
 
     const response = await client.get('/api/orders')
 

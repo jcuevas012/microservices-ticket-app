@@ -15,22 +15,20 @@ const LandingPage: NextPage<{ currentUser: any }> = ({ currentUser }) => {
                         <h2 className='text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
                             {currentUser && <span className='block'>Welcome {currentUser.email}</span>}
                             <span className='block'>Planing to go to the event?</span>
-                            <span className='block text-indigo-600'>Let's dive in.</span>
+                            <span className='block text-indigo-600'>Lets dive in.</span>
                         </h2>
                         <div className='mt-8 flex lg:mt-0 lg:flex-shrink-0'>
                             <div className='inline-flex rounded-md shadow'>
                                 <Link href={'/tickets'}>
                                     <a className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700'>
-                                        {' '}
-                                        Buy Tickets{' '}
+                                        Buy Tickets
                                     </a>
                                 </Link>
                             </div>
                             <div className='ml-3 inline-flex rounded-md shadow'>
                                 <Link href={'/tickets/new'}>
                                     <a className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50'>
-                                        {' '}
-                                        Sell Tickets{' '}
+                                        Sell Tickets
                                     </a>
                                 </Link>
                             </div>
